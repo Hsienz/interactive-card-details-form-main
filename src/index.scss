@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.form {
+		p {
+			@apply tracking-widest text-Very_dark_violet mt-4 ;
+		}
+		input {
+			@apply px-4 tracking-wider text-Dark_grayish_violet py-2 outline-none border-2 border-Light_grayish_violet rounded-lg placeholder:tracking-wider placeholder:text-Dark_grayish_violet my-2;
+
+		}
+	}
+}
