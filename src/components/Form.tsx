@@ -1,25 +1,31 @@
+import React, { useRef } from "react";
+import TitleInput from "./TitleInput";
+import inputs from "./constants/inputs";
 export default function Form() {
+	const inputRef = useRef<any[]>([])
+	const assignRef = (idx:number) => {
+		return (elem:HTMLInputElement) => inputRef.current[idx] = elem
+	}
+	const validate = () => {
+		console.log(inputRef.current)
+		inputRef.current.forEach(x => x.validate());
+	}
 	return (
-		<div className="form uppercase">
-			<p>Cardholder Name</p>
-			<input type="text" placeholder="e.g. Jane Appleseed" className="w-full" />
-			<p>Card Number</p>
-			<input type="text" placeholder="e.g. 1234 5678 9123 0000" className="w-full" />
-			<div className="flex w-full gap-x-4">
-				<div className="flex flex-col w-3/5">
-					<p>Exp. Date (MM/YY)</p>
-					<div className="flex gap-x-2">
-						<input type="text" placeholder="MM" className="w-1/2"/>
-						<input type="text" placeholder="YY" className="w-1/2"/>
-					</div>
-				</div>
-				<div className="flex flex-col w-2/5">
-					<p>CVC</p>
-					<input type="text" placeholder="e.g. 123" />
-				</div>
+		<div className="flex flex-col gap-y-4">
+			<TitleInput ref={assignRef(0)} {...inputs[0]} />
+			<TitleInput ref={assignRef(1)} {...inputs[1]} />
+			<div className="flex gap-x-4">
+				<TitleInput ref={assignRef(2)} {...inputs[2]} />
+				<TitleInput ref={assignRef(3)} {...inputs[3]} />
 			</div>
-			<button className="w-full bg-Very_dark_violet text-Light_grayish_violet rounded-lg py-4 text-xl transition-all hover:brightness-150 mt-8">Confirm</button>
 
+			<button
+				type="submit"
+				className="w-full bg-Very_dark_violet text-Light_grayish_violet rounded-lg py-4 text-xl transition-all hover:brightness-150 mt-6"
+				onClick={validate}
+			>
+				Confirm
+			</button>
 		</div>
 	);
 }
